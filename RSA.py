@@ -87,6 +87,15 @@ def generate_keypair(p, q):
     # Return the array of bytes as a string
     return ''.join(plain)
 
+    def encrypt(pk, plaintext):
+    # Unpack the key into it's components
+    key, n = pk
+    # Convert each letter in the plaintext to numbers based on
+    # the character using a^b mod m
+    cipher = [(ord(char) ** key) % n for char in plaintext]
+    # Return the array of bytes
+    return cipher
+
 
 if __name__ == '__main__':
     print("RSA Encrypter/ Decrypter")
