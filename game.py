@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
+from copy import deepcopy
 
 
 class GameOfLife:
@@ -61,6 +62,10 @@ class GameOfLife:
             for j in range(self.cell_width):
                 empty.append(random.randint(0, 1))
             self.clist.append(empty)
+        if not randomize:
+            for i in range(self.cell_height):
+                for j in range(self.cell_width):
+                    self.clist[i][j] = 0
         return self.clist
 
     def draw_cell_list(self, clist):
@@ -85,7 +90,7 @@ class GameOfLife:
         return neighbours
 
     def update_cell_list(self, cell_list):
-        new_list = cell_list
+        new_list = deepcopy(cell_list)
         for i in range(self.cell_height):
             for j in range(self.cell_width):
                 if cell_list[i][j]:
@@ -104,4 +109,3 @@ class GameOfLife:
 if __name__ == '__main__':
     game = GameOfLife(601, 601, 20)
     game.run()
-
